@@ -6,6 +6,7 @@
  */
 
 // Sead was here
+//eric sherman, tej lalvani, sead niksic
 
 // Pin 13 has an LED connected on most Arduino boards.
 // Pin 11 has the LED on Teensy 2.0
@@ -45,4 +46,5 @@ void loop() {
     delay(1000);   
   }
               // wait for a second
+  //Tej Lalvani
 }
