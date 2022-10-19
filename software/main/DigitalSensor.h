@@ -1,5 +1,5 @@
-#ifndef DIGITALSENSOR
-#define DIGITALSENSOR
+#ifndef DIGITALSENSOR_H
+#define DIGITALSENSOR_H
 
 #include "Arduino.h"
 class DigitalSensor

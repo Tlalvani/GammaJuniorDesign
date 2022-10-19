@@ -1,9 +1,13 @@
-#include "DigitalSensor.h"
-DigitalSensor d0(14);
-void setup() {
+#include "Game.h"
+
+Game *game;
+void setup()
+{
   Serial.begin(9600);
+  game = new Game;
 }
 
-void loop() {
-  Serial.println(d0.getReading());
+void loop()
+{
+  game->runGame();
 }
