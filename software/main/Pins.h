@@ -12,5 +12,5 @@ const int LEFT_TURN_PIN = 18;
 const int NO_TURN_PIN = 17;
 const int RIGHT_TURN_PIN = 16;
 
-const int START_PIN = NULL; // TODO Start pin
+const int START_PIN = 10;
 #endif
