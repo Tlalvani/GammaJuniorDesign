@@ -1,0 +1,111 @@
+Change Component Designator: OldDesignator=P1 NewDesignator=J1
+Change Component Designator: OldDesignator=P2 NewDesignator=J2
+Change Component Designator: OldDesignator=P? NewDesignator=J3
+Change Component Designator: OldDesignator=Shifter NewDesignator=J4
+Change Component Designator: OldDesignator=Turn Signal NewDesignator=J5
+Add Component: Footprint Not Found ATMEGA2650 Embed
+Add Component: Footprint Not Found ATMEGA2650 Embed
+Add Component: Footprint Not Found ATMEGA2650 Embed
+Add Pin To Net: Unknown Pin: Pin U?-3
+Add Pin To Net: Unknown Pin: Pin U?-16
+Add Pin To Net: Unknown Pin: Pin U?-25
+Add Pin To Net: Unknown Pin: Pin U?-26
+Change Net Name : Old Net Name=NetP1_1 New Net Name=NetJ1_1
+Change Net Name : Old Net Name=NetP2_18 New Net Name=NetJ2_18
+Add Net: Net with name "NetD?_1" already exists
+Add Net: Net with name "NetD?_2" already exists
+Added Pin To Net: NetName=NetJ1_2 Pin=J1-2
+Added Net: Name=NetJ1_2
+Added Pin To Net: NetName=NetJ1_3 Pin=J1-3
+Added Net: Name=NetJ1_3
+Added Pin To Net: NetName=NetJ1_4 Pin=J1-4
+Added Net: Name=NetJ1_4
+Added Pin To Net: NetName=NetJ1_5 Pin=J1-5
+Added Net: Name=NetJ1_5
+Added Pin To Net: NetName=NetJ1_6 Pin=J1-6
+Added Net: Name=NetJ1_6
+Added Pin To Net: NetName=NetJ1_7 Pin=J1-7
+Added Net: Name=NetJ1_7
+Added Pin To Net: NetName=NetJ1_8 Pin=J1-8
+Added Net: Name=NetJ1_8
+Added Pin To Net: NetName=NetJ1_9 Pin=J1-9
+Added Net: Name=NetJ1_9
+Added Pin To Net: NetName=NetJ1_10 Pin=J1-10
+Added Net: Name=NetJ1_10
+Added Pin To Net: NetName=NetJ1_11 Pin=J1-11
+Added Net: Name=NetJ1_11
+Added Pin To Net: NetName=NetJ1_12 Pin=J1-12
+Added Net: Name=NetJ1_12
+Added Pin To Net: NetName=NetJ1_13 Pin=J1-13
+Added Net: Name=NetJ1_13
+Added Pin To Net: NetName=NetJ1_14 Pin=J1-14
+Added Net: Name=NetJ1_14
+Added Pin To Net: NetName=NetJ1_15 Pin=J1-15
+Added Net: Name=NetJ1_15
+Added Pin To Net: NetName=NetJ1_16 Pin=J1-16
+Added Net: Name=NetJ1_16
+Added Pin To Net: NetName=NetJ1_17 Pin=J1-17
+Added Net: Name=NetJ1_17
+Added Pin To Net: NetName=NetJ1_18 Pin=J1-18
+Added Net: Name=NetJ1_18
+Added Pin To Net: NetName=NetJ2_2 Pin=J2-2
+Added Net: Name=NetJ2_2
+Added Pin To Net: NetName=NetJ2_3 Pin=J2-3
+Added Net: Name=NetJ2_3
+Added Pin To Net: NetName=NetJ2_4 Pin=J2-4
+Added Net: Name=NetJ2_4
+Added Pin To Net: NetName=NetJ2_5 Pin=J2-5
+Added Net: Name=NetJ2_5
+Added Pin To Net: NetName=NetJ2_6 Pin=J2-6
+Added Net: Name=NetJ2_6
+Added Pin To Net: NetName=NetJ2_7 Pin=J2-7
+Added Net: Name=NetJ2_7
+Added Pin To Net: NetName=NetJ2_8 Pin=J2-8
+Added Net: Name=NetJ2_8
+Added Pin To Net: NetName=NetJ2_9 Pin=J2-9
+Added Net: Name=NetJ2_9
+Added Pin To Net: NetName=NetJ2_10 Pin=J2-10
+Added Net: Name=NetJ2_10
+Added Pin To Net: NetName=NetJ2_11 Pin=J2-11
+Added Net: Name=NetJ2_11
+Added Pin To Net: NetName=NetJ2_12 Pin=J2-12
+Added Net: Name=NetJ2_12
+Added Pin To Net: NetName=NetJ2_13 Pin=J2-13
+Added Net: Name=NetJ2_13
+Added Pin To Net: NetName=NetJ2_14 Pin=J2-14
+Added Net: Name=NetJ2_14
+Added Pin To Net: NetName=NetJ2_15 Pin=J2-15
+Added Net: Name=NetJ2_15
+Added Pin To Net: NetName=NetJ2_16 Pin=J2-16
+Added Net: Name=NetJ2_16
+Added Pin To Net: NetName=NetJ2_17 Pin=J2-17
+Added Net: Name=NetJ2_17
+Added Pin To Net: NetName=NetJ3_3 Pin=J3-3
+Added Net: Name=NetJ3_3
+Added Pin To Net: NetName=NetJ3_4 Pin=J3-4
+Added Net: Name=NetJ3_4
+Added Pin To Net: NetName=NetJ3_5 Pin=J3-5
+Added Net: Name=NetJ3_5
+Added Pin To Net: NetName=NetJ3_6 Pin=J3-6
+Added Net: Name=NetJ3_6
+Added Pin To Net: NetName=NetJ4_3 Pin=J4-3
+Added Net: Name=NetJ4_3
+Added Pin To Net: NetName=NetJ4_4 Pin=J4-4
+Added Net: Name=NetJ4_4
+Added Pin To Net: NetName=NetJ4_5 Pin=J4-5
+Added Net: Name=NetJ4_5
+Added Pin To Net: NetName=NetJ4_6 Pin=J4-6
+Added Net: Name=NetJ4_6
+Added Pin To Net: NetName=NetJ5_3 Pin=J5-3
+Added Net: Name=NetJ5_3
+Added Pin To Net: NetName=NetJ5_4 Pin=J5-4
+Added Net: Name=NetJ5_4
+Added Pin To Net: NetName=NetJ5_5 Pin=J5-5
+Added Net: Name=NetJ5_5
+Add Net: Net with name "NetQ?_1" already exists
+Added Member To Class: ClassName=schematic Member=Component D? 1N4004
+Added Member To Class: ClassName=schematic Member=Component Q? IRF530PBF
+Added Member To Class: ClassName=schematic Member=Component R? MFR-25FBF52-100K
+Add Class Member: Failed to add class member : Component U? ATMega2650 Embed
+Add Class Member: Failed to add class member : Component U? ATMega2650 Embed
+Add Class Member: Failed to add class member : Component U? ATMega2650 Embed
