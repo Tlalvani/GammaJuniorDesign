@@ -1,0 +1,56 @@
+Change Component Designator: OldDesignator=C? NewDesignator=C1
+Add Component: Footprint Not Found ATMEGA2650 Embed
+Add Pin To Net: Unknown Pin: Pin U1-1
+Add Pin To Net: Unknown Pin: Pin U1-2
+Add Pin To Net: Unknown Pin: Pin U1-3
+Add Pin To Net: Unknown Pin: Pin U1-4
+Add Pin To Net: Unknown Pin: Pin U1-16
+Add Pin To Net: Unknown Pin: Pin U1-25
+Add Pin To Net: Unknown Pin: Pin U1-26
+Add Pin To Net: Unknown Pin: Pin U1-27
+Add Pin To Net: Unknown Pin: Pin U1-28
+Add Pin To Net: Unknown Pin: Pin U1-29
+Add Pin To Net: Unknown Pin: Pin U1-30
+Add Pin To Net: Unknown Pin: Pin U1-31
+Add Pin To Net: Unknown Pin: Pin U1-32
+Add Pin To Net: Unknown Pin: Pin U1-33
+Add Pin To Net: Unknown Pin: Pin U1-34
+Add Pin To Net: Unknown Pin: Pin U1-35
+Add Pin To Net: Unknown Pin: Pin U1-36
+Add Pin To Net: Unknown Pin: Pin U1-37
+Add Pin To Net: Unknown Pin: Pin U1-38
+Add Pin To Net: Unknown Pin: Pin U1-39
+Add Pin To Net: Unknown Pin: Pin U1-40
+Add Pin To Net: Unknown Pin: Pin U1-41
+Add Pin To Net: Unknown Pin: Pin U1-42
+Add Pin To Net: Unknown Pin: Pin U1-43
+Add Pin To Net: Unknown Pin: Pin U1-44
+Add Pin To Net: Unknown Pin: Pin U1-45
+Add Pin To Net: Unknown Pin: Pin U1-46
+Add Pin To Net: Unknown Pin: Pin U1-47
+Add Pin To Net: Unknown Pin: Pin U1-48
+Add Pin To Net: Unknown Pin: Pin U1-50
+Add Pin To Net: Unknown Pin: Pin U1-65
+Add Pin To Net: Unknown Pin: Pin U1-66
+Add Pin To Net: Unknown Pin: Pin U1-67
+Add Pin To Net: Unknown Pin: Pin U1-68
+Add Pin To Net: Unknown Pin: Pin U1-69
+Add Pin To Net: Unknown Pin: Pin U1-70
+Add Pin To Net: Unknown Pin: Pin U1-71
+Add Pin To Net: Unknown Pin: Pin U1-72
+Add Pin To Net: Unknown Pin: Pin U1-73
+Add Pin To Net: Unknown Pin: Pin U1-74
+Add Pin To Net: Unknown Pin: Pin U1-75
+Add Pin To Net: Unknown Pin: Pin U1-76
+Add Pin To Net: Unknown Pin: Pin U1-77
+Add Pin To Net: Unknown Pin: Pin U1-78
+Add Pin To Net: Unknown Pin: Pin U1-79
+Add Pin To Net: Unknown Pin: Pin U1-80
+Add Pin To Net: Unknown Pin: Pin U1-81
+Add Pin To Net: Unknown Pin: Pin U1-82
+Add Pin To Net: Unknown Pin: Pin U1-83
+Add Pin To Net: Unknown Pin: Pin U1-84
+Add Pin To Net: Unknown Pin: Pin U1-85
+Add Pin To Net: Unknown Pin: Pin U1-86
+Change Net Name : Old Net Name=NetC?_1 New Net Name=NetC1_1
+Add Class Member: Failed to add class member : Component U1 ATMega2650 Embed

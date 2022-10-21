@@ -1,0 +1,70 @@
+Change Component Designator: OldDesignator=P? NewDesignator=J1
+Change Component Designator: OldDesignator=P? NewDesignator=J2
+Change Net Name : Old Net Name=NetJ3_2 New Net Name=NetJ2_18
+Change Net Name : Old Net Name=NetP?_2 New Net Name=NetJ1_2
+Change Net Name : Old Net Name=NetP?_3 New Net Name=NetJ2_3
+Change Net Name : Old Net Name=NetP?_4 New Net Name=NetJ2_4
+Change Net Name : Old Net Name=NetP?_5 New Net Name=NetJ1_5
+Change Net Name : Old Net Name=NetP?_6 New Net Name=NetJ2_6
+Change Net Name : Old Net Name=NetP?_7 New Net Name=NetJ2_7
+Change Net Name : Old Net Name=NetP?_8 New Net Name=NetJ1_8
+Change Net Name : Old Net Name=NetP?_9 New Net Name=NetJ2_9
+Change Net Name : Old Net Name=NetP?_10 New Net Name=NetJ1_10
+Change Net Name : Old Net Name=NetP?_11 New Net Name=NetJ1_11
+Change Net Name : Old Net Name=NetP?_12 New Net Name=NetJ1_12
+Change Net Name : Old Net Name=NetP?_13 New Net Name=NetJ1_13
+Change Net Name : Old Net Name=NetP?_14 New Net Name=NetJ2_14
+Change Net Name : Old Net Name=NetP?_15 New Net Name=NetJ2_15
+Change Net Name : Old Net Name=NetP?_16 New Net Name=NetJ2_16
+Change Net Name : Old Net Name=NetP?_17 New Net Name=NetJ2_17
+Change Net Name : Old Net Name=NetP?_18 New Net Name=NetJ1_18
+Added Pin To Net: NetName=NetJ1_3 Pin=J1-3
+Added Pin To Net: NetName=NetJ1_3 Pin=U1-41
+Added Net: Name=NetJ1_3
+Added Pin To Net: NetName=NetJ1_4 Pin=J1-4
+Added Pin To Net: NetName=NetJ1_4 Pin=U1-43
+Added Net: Name=NetJ1_4
+Added Pin To Net: NetName=NetJ1_6 Pin=J1-6
+Added Pin To Net: NetName=NetJ1_6 Pin=U1-47
+Added Net: Name=NetJ1_6
+Added Pin To Net: NetName=NetJ1_7 Pin=J1-7
+Added Pin To Net: NetName=NetJ1_7 Pin=U1-66
+Added Net: Name=NetJ1_7
+Added Pin To Net: NetName=NetJ1_9 Pin=J1-9
+Added Pin To Net: NetName=NetJ1_9 Pin=U1-70
+Added Net: Name=NetJ1_9
+Added Pin To Net: NetName=NetJ1_14 Pin=J1-14
+Added Pin To Net: NetName=NetJ1_14 Pin=U1-80
+Added Net: Name=NetJ1_14
+Added Pin To Net: NetName=NetJ1_15 Pin=J1-15
+Added Pin To Net: NetName=NetJ1_15 Pin=U1-82
+Added Net: Name=NetJ1_15
+Added Pin To Net: NetName=NetJ1_16 Pin=J1-16
+Added Pin To Net: NetName=NetJ1_16 Pin=U1-84
+Added Net: Name=NetJ1_16
+Added Pin To Net: NetName=NetJ1_17 Pin=J1-17
+Added Pin To Net: NetName=NetJ1_17 Pin=U1-86
+Added Net: Name=NetJ1_17
+Added Pin To Net: NetName=NetJ2_2 Pin=J2-2
+Added Pin To Net: NetName=NetJ2_2 Pin=U1-40
+Added Net: Name=NetJ2_2
+Added Pin To Net: NetName=NetJ2_5 Pin=J2-5
+Added Pin To Net: NetName=NetJ2_5 Pin=U1-46
+Added Net: Name=NetJ2_5
+Added Pin To Net: NetName=NetJ2_8 Pin=J2-8
+Added Pin To Net: NetName=NetJ2_8 Pin=U1-67
+Added Net: Name=NetJ2_8
+Added Pin To Net: NetName=NetJ2_10 Pin=J2-10
+Added Pin To Net: NetName=NetJ2_10 Pin=U1-71
+Added Net: Name=NetJ2_10
+Added Pin To Net: NetName=NetJ2_11 Pin=J2-11
+Added Pin To Net: NetName=NetJ2_11 Pin=U1-73
+Added Net: Name=NetJ2_11
+Added Pin To Net: NetName=NetJ2_12 Pin=J2-12
+Added Pin To Net: NetName=NetJ2_12 Pin=U1-75
+Added Net: Name=NetJ2_12
+Added Pin To Net: NetName=NetJ2_13 Pin=J2-13
+Added Pin To Net: NetName=NetJ2_13 Pin=U1-77
+Added Net: Name=NetJ2_13
+Added Member To Class: ClassName=schematic Member=Component J1 Header 20
+Added Room: Name=schematic
