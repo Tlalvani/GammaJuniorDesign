@@ -1,0 +1,25 @@
+Removed Pin From Net: NetName=GND Pin=J5-2
+Removed Pin From Net: NetName=NetJ5_4 Pin=U1-33
+Removed Pin From Net: NetName=NetJ5_5 Pin=U1-34
+Change Component Footprint: Designator=J4 Old Footprint=TECO-640456-6_V New Footprint=HDR2X3
+Change Component Footprint: Designator=J5 Old Footprint=TECO-640456-6_V New Footprint=HDR2X3
+Change Component Comment : Designator=J4 Old Comment=640456-6 New Comment=Header 3X2
+Change Component Comment : Designator=J5 Old Comment=640456-6 New Comment=Header 3X2
+Change Managed Component Library Link : Designator=J4 Old VaultGUID=B7D15EC3-160A-466F-A46C-7801FE6295A7 New VaultGUID= Old ItemGUID=E538C318-A747-4416-AE3D-28579115FFF2 New ItemGUID= Old RevisionGUID=E4637DB5-DD02-4A40-90F4-83F188457AA4 New RevisionGUID=
+Change Managed Component Library Link : Designator=J5 Old VaultGUID=B7D15EC3-160A-466F-A46C-7801FE6295A7 New VaultGUID= Old ItemGUID=E538C318-A747-4416-AE3D-28579115FFF2 New ItemGUID= Old RevisionGUID=E4637DB5-DD02-4A40-90F4-83F188457AA4 New RevisionGUID=
+Change component parameters: Designator = "J4" ("J4"); Footprint = "TECO-640456-6_V"; UniqueID = "\LMCDDSUE" ("\LMCDDSUE")
+Change component parameters (AddParameter): Name = "LatestRevisionDate"; Value = "17-Jul-2002"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "LatestRevisionNote"; Value = "Re-released for DXP Platform."; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Publisher"; Value = "Altium Limited"; VariantName = "[No Variations]"
+Change component parameters: Designator = "J5" ("J5"); Footprint = "TECO-640456-6_V"; UniqueID = "\VQEDIIKI" ("\VQEDIIKI")
+Change component parameters (AddParameter): Name = "LatestRevisionDate"; Value = "17-Jul-2002"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "LatestRevisionNote"; Value = "Re-released for DXP Platform."; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Publisher"; Value = "Altium Limited"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=5V Pin=J5-2
+Added Pin To Net: NetName=GND Pin=J5-3
+Added Pin To Net: NetName=NetJ5_5 Pin=U1-33
+Added Pin To Net: NetName=NetJ5_4 Pin=U1-36
+Added Pin To Net: NetName=NetJ5_6 Pin=J5-6
+Added Pin To Net: NetName=NetJ5_6 Pin=U1-34
+Added Net: Name=NetJ5_6
+Added Room: Name=schematic

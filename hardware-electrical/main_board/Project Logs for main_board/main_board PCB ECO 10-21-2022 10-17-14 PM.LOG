@@ -1,0 +1,21 @@
+Added Component: Designator=J13(HDR2X3)
+Add component (AddParameter): Name = "LatestRevisionDate"; Value = "17-Jul-2002"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "LatestRevisionNote"; Value = "Re-released for DXP Platform."; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Publisher"; Value = "Altium Limited"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=GND Pin=J13-1
+Added Pin To Net: NetName=5V Pin=J13-5
+Added Pin To Net: NetName=5V Pin=U1-14
+Added Pin To Net: NetName=MISO Pin=J13-6
+Added Pin To Net: NetName=MISO Pin=U1-13
+Added Net: Name=MISO
+Added Pin To Net: NetName=MOSI Pin=J13-3
+Added Pin To Net: NetName=MOSI Pin=U1-15
+Added Net: Name=MOSI
+Added Pin To Net: NetName=RST Pin=J13-2
+Added Pin To Net: NetName=RST Pin=U1-11
+Added Net: Name=RST
+Added Pin To Net: NetName=SCK Pin=J13-4
+Added Pin To Net: NetName=SCK Pin=U1-12
+Added Net: Name=SCK
+Added Member To Class: ClassName=schematic Member=Component J13 Header 3X2
+Added Room: Name=schematic
