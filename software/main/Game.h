@@ -6,6 +6,7 @@
 #include "SteeringWheel.h"
 #include "TurnSignal.h"
 #include "Shifter.h"
+#include "Display.h"
 #include "Pins.h"
 #include <TFT_HX8357.h> // Hardware-specific library
 
@@ -41,7 +42,7 @@ private:
     SteeringWheel *wheel;
     TurnSignal *turnSignal;
     Shifter *shifter;
-    TFT_HX8357 *tft;
+    Display *display;
     Action generateAction()
     {
         int r = random(0, 10);
@@ -92,9 +93,6 @@ public:
         wheel = new SteeringWheel;
         shifter = new Shifter;
         turnSignal = new TurnSignal;
-        tft = new TFT_HX8357();
-        tft->init();
-        tft->setRotation(3);
     }
     ~Game()
     {
@@ -103,7 +101,7 @@ public:
         delete wheel;
         delete shifter;
         delete turnSignal;
-        delete tft;
+        delete display;
     }
     void runGame()
     {
@@ -117,10 +115,7 @@ public:
         {
             if (state == State::WAITING)
             {
-                tft->setCursor(0, 0, 2);
-                tft->setTextColor(TFT_WHITE, TFT_BLACK);
-                tft->setTextSize(3);
-                tft->println("Waiting for start");
+                display->print("Waiting for start");
                 Serial.println("Waiting for start");
                 if (start->getReading() == 1)
                 {
@@ -130,20 +125,17 @@ public:
             }
             else if (state == State::START)
             {
+                display->print("Starting");
                 totalAttempts = 0;
                 correctAttempts = 0;
                 state = State::GENERATE_ACTION;
             }
             else if (state == State::GENERATE_ACTION)
             {
-                delay(500);
                 generatedAction = generateAction();
                 state = State::USER_INPUT;
-                tft->setCursor(0, 0, 2);
-                tft->setTextColor(TFT_WHITE, TFT_BLACK);
-                tft->setTextSize(3);
-                tft->println("Generated Action: ");
-                tft->println(actions[generatedAction]);
+                delay(2000);
+                display->print("Generated Action: " + actions[generatedAction]);
                 Serial.print("Generated Action: ");
                 Serial.println(actions[generatedAction]);
             }
@@ -171,20 +163,13 @@ public:
                 }
                 if (action)
                 {
-                    tft->setCursor(0, 0, 2);
-                    tft->setTextColor(TFT_WHITE, TFT_BLACK);
-                    tft->setTextSize(3);
-                    tft->println("Chosen Action: ");
-                    tft->println(actions[action]);
+                    display->print("Chosen Action: " + actions[action]);
                     Serial.print("Chosen Action: ");
                     Serial.println(actions[action]);
                 }
                 else
                 {
-                    tft->setCursor(0, 0, 2);
-                    tft->setTextColor(TFT_WHITE, TFT_BLACK);
-                    tft->setTextSize(3);
-                    tft->println("No action!");
+                    display->print("No action!");
                 }
                 totalAttempts++;
                 if (correctAttempts == 99 || !actionMade)
@@ -199,11 +184,7 @@ public:
             else if (state == State::DONE)
             {
                 // Screen shows correctAttempts/totalAttempts
-                tft->setCursor(0, 0, 2);
-                tft->setTextColor(TFT_WHITE, TFT_BLACK);
-                tft->setTextSize(3);
-                tft->println("Score: ");
-                tft->println(correctAttempts / totalAttempts);
+                display->print("Score: " + String(correctAttempts / totalAttempts));
                 delay(5000);
                 state = State::WAITING;
             }
