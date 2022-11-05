@@ -12,31 +12,38 @@ private:
     int prevVal[3];
 
 public:
-    Shifter()
+    TurnSignal()
     {
         DigitalSensor temp[3] = {DigitalSensor(LEFT_TURN_PIN), DigitalSensor(NO_TURN_PIN), DigitalSensor(RIGHT_TURN_PIN)};
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 3; i++)
             turnSignal[i] = &temp[i];
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 3; i++)
         {
             prevVal[i] = turnSignal[i]->getReading();
         }
+        Serial.println("PREVIOUS: " + String(prevVal[0]) + " " + String(prevVal[1]) + " " + String(prevVal[2]));
     }
 
     int detectChange()
     {
+//        Serial.println("PREVIOUS: " + String(prevVal[0]) + " " + String(prevVal[1]) + " " + String(prevVal[2]));
+//        Serial.println("CURRENT: " + String(turnSignal[0]->getReading()) + " " + String(turnSignal[1]->getReading()) + " " + String(turnSignal[2]->getReading()));
+//        
+        int newTurn = -1;
         for (int i = 0; i < 3; i++)
         {
-            if (prevVal[i] != turnSignal[i]->getReading())
+            int val = turnSignal[i]->getReading();
+            if (prevVal[i] != val)
             {
-                prevVal[i] = turnSignal[i]->getReading();
-                if (turnSignal[i] == 0)
+                Serial.println("DIFF: " + String(prevVal[i]) + " " + String(val));
+                prevVal[i] = val;
+                if (val == 0)
                 {
-                    return i;
+                    newTurn = i;
                 }
             }
         }
-        return -1;
+        return newTurn;
     }
 };
 

@@ -38,7 +38,11 @@ public:
     Direction getDirection()
     {
         // TODO if statement based on accel
-
+        accelgyro.getAcceleration(&ax, &ay, &az);
+        if(ax < -10000)
+          return Direction::RIGHT;
+        if(ax > 10000)
+          return Direction::LEFT;
         return Direction::NONE;
     }
 };

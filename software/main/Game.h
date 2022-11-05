@@ -8,7 +8,6 @@
 #include "Shifter.h"
 #include "Display.h"
 #include "Pins.h"
-#include <TFT_HX8357.h> // Hardware-specific library
 
 enum State
 {
@@ -19,20 +18,15 @@ enum State
     DONE
 };
 
-const String actions[] = {"shift_0", "shift_1", "shift_2", "shift_3", "steer_left", "steer_right", "horn", "turn_left", "turn_right", "no_turn"};
+const String actions[] = {"shift", "steer_left", "steer_right", "horn", "turn_signal"};
 
 enum Action
 {
-    SHIFT0,
-    SHIFT1,
-    SHIFT2,
-    SHIFT3,
+    SHIFT,
     STEER_LEFT,
     STEER_RIGHT,
     HORN,
-    TURN_LEFT,
-    TURN_RIGHT,
-    NO_TURN
+    TURN_SIGNAL
 };
 class Game
 {
@@ -45,45 +39,10 @@ private:
     Display *display;
     Action generateAction()
     {
-        int r = random(0, 10);
+        int r = random(0, 5);
         return static_cast<Action>(r);
     }
 
-    Action getUserAction()
-    {
-        int shifterChange = shifter->detectChange();
-        int turnSignalDir = turnSignal->detectChange();
-        Direction wheelDirection = wheel->getDirection();
-        if (horn->getReading() == 0)
-        {
-            return Action::HORN;
-        }
-        else if (shifterChange != -1)
-        {
-            return static_cast<Action>(shifterChange);
-        }
-        else if (wheelDirection != Direction::NONE)
-        {
-            return wheelDirection == Direction::LEFT ? Action::STEER_LEFT : Action::STEER_RIGHT;
-        }
-        else if (turnSignal != -1)
-        {
-            if (turnSignal == 0)
-            {
-                return Action::TURN_LEFT;
-            }
-            else if (turnSignal == 1)
-            {
-                return Action::NO_TURN;
-            }
-            else
-            {
-                return Action::TURN_RIGHT;
-            }
-        }
-        else
-            return -1;
-    }
 
 public:
     Game()
@@ -93,7 +52,9 @@ public:
         wheel = new SteeringWheel;
         shifter = new Shifter;
         turnSignal = new TurnSignal;
+        display = new Display;
     }
+
     ~Game()
     {
         delete start;
@@ -103,19 +64,50 @@ public:
         delete turnSignal;
         delete display;
     }
+
+    Action getUserAction()
+    {
+        int shifterChange = shifter->detectChange();
+        int turnSignalDir = turnSignal->detectChange();
+        Direction wheelDirection = wheel->getDirection();
+        if (horn->getReading() == 0)
+        {
+            //tone(SPEAKER_PIN, 50, 500);
+            return Action::HORN;
+        }
+        else if (shifterChange != -1)
+        {
+            Serial.println("SHIFT: " + String(shifterChange));
+            return 0;
+        }
+        else if (wheelDirection != Direction::NONE)
+        {
+            Serial.println("STEER: " + String(wheelDirection));
+            return wheelDirection == Direction::LEFT ? Action::STEER_LEFT : Action::STEER_RIGHT;
+        }
+        else if (turnSignalDir != -1)
+        {
+            Serial.println("TURN: " + String(turnSignalDir));
+            return 4;
+        }
+        else
+            return -1;
+    }
+    
     void runGame()
     {
         Serial.println("Game Running");
-        State state = State::START;
+        State state = State::WAITING;
         int totalAttempts;
         int correctAttempts;
-        unsigned long timeToAction = 5000;
+        unsigned long timeToAction = 10000;
         Action generatedAction;
         while (true)
         {
             if (state == State::WAITING)
             {
-                display->print("Waiting for start");
+                digitalWrite(2,1);
+                display->print("Waiting");
                 Serial.println("Waiting for start");
                 if (start->getReading() == 1)
                 {
@@ -125,6 +117,7 @@ public:
             }
             else if (state == State::START)
             {
+                digitalWrite(2,0);
                 display->print("Starting");
                 totalAttempts = 0;
                 correctAttempts = 0;
@@ -152,19 +145,21 @@ public:
                         actionMade = true;
                         correctAttempts++;
                         timeToAction -= 100;
+                        display->reset();
                         break;
                     }
                     else if (action != -1)
                     {
                         // Screen shows unsuccessful attempt
                         actionMade = true;
+                        display->reset();
                         break;
                     }
                 }
-                if (action)
+                if (action != -1)
                 {
-                    display->print("Chosen Action: " + actions[action]);
-                    Serial.print("Chosen Action: ");
+                    display->print("User chose: " + actions[action]);
+                    Serial.print("User chose: ");
                     Serial.println(actions[action]);
                 }
                 else
@@ -184,8 +179,10 @@ public:
             else if (state == State::DONE)
             {
                 // Screen shows correctAttempts/totalAttempts
-                display->print("Score: " + String(correctAttempts / totalAttempts));
+                display->reset();
+                display->print("Score: " + String(correctAttempts) + "/" + String(totalAttempts));
                 delay(5000);
+                display->reset();
                 state = State::WAITING;
             }
         }

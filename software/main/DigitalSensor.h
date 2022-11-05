@@ -10,6 +10,7 @@ private:
 public:
     DigitalSensor(int pin)
     {
+        pinMode(pin, INPUT);
         this->pin = pin;
     }
 

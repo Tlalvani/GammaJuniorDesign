@@ -27,11 +27,16 @@ public:
     int detectChange()
     {
         int newGearIdx = -1;
+        Serial.println("CURR: " + String(shifter[0]->getReading()) + ',' + String(shifter[1]->getReading()) + ',' + String(shifter[2]->getReading()) + ',' + String(shifter[3]->getReading()));
+        Serial.println("PREVIOUS: " + String(prevVal[0]) + ',' + String(prevVal[1]) + ',' + String(prevVal[2]) + ',' + String(prevVal[3]));
+        
+
         for (int i = 0; i < 4; i++)
         {
-            if (prevVal[i] != shifter[i]->getReading())
+            int val = shifter[i]->getReading();
+            if (prevVal[i] != val)
             {
-                int val = shifter[i]->getReading();
+                Serial.println("DIFF: " + String(prevVal[i]) + " " + String(val));
                 prevVal[i] = val;
                 if (val == 0)
                 {
