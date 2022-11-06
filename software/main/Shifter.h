@@ -15,25 +15,26 @@ private:
 public:
     Shifter()
     {
-        DigitalSensor temp[4] = {DigitalSensor(SHIFT_0_PIN), DigitalSensor(SHIFT_1_PIN), DigitalSensor(SHIFT_2_PIN), DigitalSensor(SHIFT_3_PIN)};
-        for (int i = 0; i < 4; i++)
-            shifter[i] = &temp[i];
-        for (int i = 0; i < 4; i++)
-        {
-            prevVal[i] = shifter[i]->getReading();
-        }
+//        DigitalSensor temp[4] = {DigitalSensor(SHIFT_0_PIN), DigitalSensor(SHIFT_3_PIN), DigitalSensor(SHIFT_2_PIN), DigitalSensor(SHIFT_3_PIN)};
+//        for (int i = 0; i < 4; i++)
+//            shifter[i] = &temp[i];
+//        for (int i = 0; i < 4; i++)
+//        {
+//            prevVal[i] = shiffter[i]->getReading();
+//        }
+         int tmp[4] = {digitalRead(SHIFT_0_PIN), digitalRead(SHIFT_1_PIN), digitalRead(SHIFT_2_PIN), digitalRead(SHIFT_3_PIN)};
+         
+         for (int i = 0; i < 4; i++)
+            prevVal[i] = tmp[i];
     }
 
     int detectChange()
     {
         int newGearIdx = -1;
-        Serial.println("CURR: " + String(shifter[0]->getReading()) + ',' + String(shifter[1]->getReading()) + ',' + String(shifter[2]->getReading()) + ',' + String(shifter[3]->getReading()));
-        Serial.println("PREVIOUS: " + String(prevVal[0]) + ',' + String(prevVal[1]) + ',' + String(prevVal[2]) + ',' + String(prevVal[3]));
-        
-
+        int curr[4] = {digitalRead(SHIFT_0_PIN), digitalRead(SHIFT_3_PIN), digitalRead(SHIFT_2_PIN), digitalRead(SHIFT_3_PIN)};
         for (int i = 0; i < 4; i++)
         {
-            int val = shifter[i]->getReading();
+            int val = curr[i];
             if (prevVal[i] != val)
             {
                 Serial.println("DIFF: " + String(prevVal[i]) + " " + String(val));

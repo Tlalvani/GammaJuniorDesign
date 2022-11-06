@@ -53,6 +53,7 @@ public:
         shifter = new Shifter;
         turnSignal = new TurnSignal;
         display = new Display;
+        randomSeed(analogRead(0));
     }
 
     ~Game()
@@ -72,7 +73,7 @@ public:
         Direction wheelDirection = wheel->getDirection();
         if (horn->getReading() == 0)
         {
-            //tone(SPEAKER_PIN, 50, 500);
+            tone(SPEAKER_PIN, 50, 500);
             return Action::HORN;
         }
         else if (shifterChange != -1)
@@ -102,6 +103,7 @@ public:
         int correctAttempts;
         unsigned long timeToAction = 10000;
         Action generatedAction;
+        display->reset();
         while (true)
         {
             if (state == State::WAITING)
@@ -143,27 +145,24 @@ public:
                     if (action == generatedAction)
                     {
                         actionMade = true;
+                        display->reset();
+                        display->print("Correct action!");
                         correctAttempts++;
                         timeToAction -= 100;
-                        display->reset();
                         break;
                     }
                     else if (action != -1)
                     {
-                        // Screen shows unsuccessful attempt
-                        actionMade = true;
                         display->reset();
+                        display->print("Wrong action!");
+                        actionMade = true;
                         break;
                     }
                 }
-                if (action != -1)
+                            
+                if (action == -1)
                 {
-                    display->print("User chose: " + actions[action]);
-                    Serial.print("User chose: ");
-                    Serial.println(actions[action]);
-                }
-                else
-                {
+                    display->reset();
                     display->print("No action!");
                 }
                 totalAttempts++;

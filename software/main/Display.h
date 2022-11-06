@@ -225,7 +225,7 @@ public:
   }
 
   void reset(){
-    tft.fillScreen(TFT_WHITE);
+    tft.fillScreen(TFT_BLACK);
   }
 
   void image()
