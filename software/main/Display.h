@@ -1,6 +1,8 @@
 #include <TFT_HX8357.h> // Hardware-specific library
 #include <SD.h>
 #define RBUFF_SIZE 256
+#define BU_BMP 1 // Temporarily flip the TFT coords for standard Bottom-Up bit maps
+#define TD_BMP 0 // Draw inverted Top-Down bitmaps in standard coord frame
 class Display
 {
 private:
@@ -217,19 +219,31 @@ public:
   }
   void print(String s)
   {
+  
+    tft.setRotation(3);
+    tft.setTextColor(TFT_WHITE, TFT_BLACK);   
+    tft.setTextDatum(4);
+    int x = 240;
+    int y = 120;
+
+    // Length (with one extra character for the null terminator)
+    int str_len = s.length() + 1; 
     
-    tft.setCursor(0, 0, 2);
-    tft.setTextColor(TFT_WHITE, TFT_BLACK);
-    tft.setTextSize(3);
-    tft.println(s);
+    // Prepare the character array (the buffer) 
+    char char_array[str_len];
+    
+    // Copy it over 
+    s.toCharArray(char_array, str_len);
+    tft.drawCentreString(char_array, x, y, 4);
   }
 
   void reset(){
     tft.fillScreen(TFT_BLACK);
   }
 
-  void image()
+  void image(char * s)
   {
-    drawBMP("waiting.bmp", 0, 0, 1);
+    tft.setRotation(1);
+    drawBMP(s, 0, 0, 0);
   }
 };

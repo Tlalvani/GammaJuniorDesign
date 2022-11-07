@@ -15,7 +15,8 @@ enum State
     START,
     GENERATE_ACTION,
     USER_INPUT,
-    DONE
+    DONE,
+    LOW_BATTERY
 };
 
 const String actions[] = {"shift", "steer_left", "steer_right", "horn", "turn_signal"};
@@ -40,9 +41,28 @@ private:
     Action generateAction()
     {
         int r = random(0, 5);
+        if (r == 0)
+        {
+            tone(SPEAKER_PIN, 400, 300);
+        }
+        else if (r == 2)
+        {
+            tone(SPEAKER_PIN, 600, 300);
+        }
+        else if (r == 3)
+        {
+            tone(SPEAKER_PIN, 250, 300);
+        }
+        else if (r == 4)
+        {
+            tone(SPEAKER_PIN, 50, 300);
+        }
+        else
+        {
+            tone(SPEAKER_PIN, 150, 300);
+        }
         return static_cast<Action>(r);
     }
-
 
 public:
     Game()
@@ -54,6 +74,7 @@ public:
         turnSignal = new TurnSignal;
         display = new Display;
         randomSeed(analogRead(0));
+        // analogReference(EXTERNAL);
     }
 
     ~Game()
@@ -78,38 +99,43 @@ public:
         }
         else if (shifterChange != -1)
         {
-            Serial.println("SHIFT: " + String(shifterChange));
             return 0;
         }
         else if (wheelDirection != Direction::NONE)
         {
-            Serial.println("STEER: " + String(wheelDirection));
             return wheelDirection == Direction::LEFT ? Action::STEER_LEFT : Action::STEER_RIGHT;
         }
         else if (turnSignalDir != -1)
         {
-            Serial.println("TURN: " + String(turnSignalDir));
             return 4;
         }
         else
             return -1;
     }
-    
+
     void runGame()
     {
         Serial.println("Game Running");
         State state = State::WAITING;
         int totalAttempts;
         int correctAttempts;
-        unsigned long timeToAction = 10000;
+        // unsigned long timeToAction = 10000;
         Action generatedAction;
         display->reset();
+        bool startScreen = false;
         while (true)
         {
+            int batteryLevel = analogRead(BATTERY_PIN);
+            Serial.println("Battery Level: " + String(batteryLevel));
             if (state == State::WAITING)
             {
-                digitalWrite(2,1);
-                display->print("Waiting");
+                digitalWrite(2, 1);
+                if(!startScreen){
+                  display->image("ss.bmp");
+                  startScreen = true;
+                }
+                
+                //display->print("Hit start button");
                 Serial.println("Waiting for start");
                 if (start->getReading() == 1)
                 {
@@ -119,7 +145,8 @@ public:
             }
             else if (state == State::START)
             {
-                digitalWrite(2,0);
+                digitalWrite(2, 0);
+                display->reset();
                 display->print("Starting");
                 totalAttempts = 0;
                 correctAttempts = 0;
@@ -127,9 +154,9 @@ public:
             }
             else if (state == State::GENERATE_ACTION)
             {
+                delay(2000);
                 generatedAction = generateAction();
                 state = State::USER_INPUT;
-                delay(2000);
                 display->print("Generated Action: " + actions[generatedAction]);
                 Serial.print("Generated Action: ");
                 Serial.println(actions[generatedAction]);
@@ -139,6 +166,7 @@ public:
                 bool actionMade = false;
                 unsigned long startingTime = millis();
                 Action action = -1;
+                float timeToAction = 1000 * (7 - .7 * log(correctAttempts + 1));
                 while (millis() < startingTime + timeToAction)
                 {
                     action = getUserAction();
@@ -148,7 +176,6 @@ public:
                         display->reset();
                         display->print("Correct action!");
                         correctAttempts++;
-                        timeToAction -= 100;
                         break;
                     }
                     else if (action != -1)
@@ -159,7 +186,7 @@ public:
                         break;
                     }
                 }
-                            
+
                 if (action == -1)
                 {
                     display->reset();
@@ -183,6 +210,11 @@ public:
                 delay(5000);
                 display->reset();
                 state = State::WAITING;
+                startScreen = false;
+            }
+            else if (state == LOW_BATTERY)
+            {
+                display->print("LOW BATTERY: " + String(batteryLevel));
             }
         }
     }

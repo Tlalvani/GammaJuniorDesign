@@ -33,7 +33,6 @@ TFT_HX8357 tft = TFT_HX8357(); // Invoke custom library
 void setup()
 {
   Serial.begin(38400); // For debug messages
-  delay(4000);
 
   tft.init(); // Initialise the display (various parameters configured)
   
@@ -65,7 +64,7 @@ void loop()
   
   // Draw bmp image top left corner at x,y = 0,0
   // Image must fit (one day I will add clipping... but it will slow things down)
-  drawBMP("waiting.bmp", 0, 0, BU_BMP);
+  drawBMP("ss.bmp", 0, 0, BU_BMP);
 
 
 

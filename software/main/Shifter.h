@@ -15,16 +15,16 @@ private:
 public:
     Shifter()
     {
-//        DigitalSensor temp[4] = {DigitalSensor(SHIFT_0_PIN), DigitalSensor(SHIFT_3_PIN), DigitalSensor(SHIFT_2_PIN), DigitalSensor(SHIFT_3_PIN)};
-//        for (int i = 0; i < 4; i++)
-//            shifter[i] = &temp[i];
-//        for (int i = 0; i < 4; i++)
-//        {
-//            prevVal[i] = shiffter[i]->getReading();
-//        }
-         int tmp[4] = {digitalRead(SHIFT_0_PIN), digitalRead(SHIFT_1_PIN), digitalRead(SHIFT_2_PIN), digitalRead(SHIFT_3_PIN)};
-         
-         for (int i = 0; i < 4; i++)
+        //        DigitalSensor temp[4] = {DigitalSensor(SHIFT_0_PIN), DigitalSensor(SHIFT_3_PIN), DigitalSensor(SHIFT_2_PIN), DigitalSensor(SHIFT_3_PIN)};
+        //        for (int i = 0; i < 4; i++)
+        //            shifter[i] = &temp[i];
+        //        for (int i = 0; i < 4; i++)
+        //        {
+        //            prevVal[i] = shiffter[i]->getReading();
+        //        }
+        int tmp[4] = {digitalRead(SHIFT_0_PIN), digitalRead(SHIFT_1_PIN), digitalRead(SHIFT_2_PIN), digitalRead(SHIFT_3_PIN)};
+
+        for (int i = 0; i < 4; i++)
             prevVal[i] = tmp[i];
     }
 
@@ -37,7 +37,7 @@ public:
             int val = curr[i];
             if (prevVal[i] != val)
             {
-                Serial.println("DIFF: " + String(prevVal[i]) + " " + String(val));
+
                 prevVal[i] = val;
                 if (val == 0)
                 {

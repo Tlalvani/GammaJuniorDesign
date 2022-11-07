@@ -14,4 +14,7 @@ const int RIGHT_TURN_PIN = 16;
 
 const int START_PIN = 8;
 const int SPEAKER_PIN = 9;
+
+const int BATTERY_PIN = A1;
+const int BATTERY_LOW = 630;
 #endif

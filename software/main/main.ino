@@ -11,7 +11,6 @@ void setup()
   Serial.begin(115200);
   game = new Game();
 
-  
 }
 
 void loop()
