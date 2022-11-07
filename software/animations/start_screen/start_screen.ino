@@ -31,10 +31,15 @@ int OldLinestoRender; // lines to render just in case it changes. this makes sur
 
 struct Line2d
 {
+  Line2D(){
+    this->p0 = Point2d();
+    this->p1 = Point2d();  
+  }
   Point2d p0;
   Point2d p1;
 };
 
+Line2d Lines[3];
 Line2d Render[3];
 Line2d ORender[3];
 
@@ -43,12 +48,12 @@ void setup() {
 
   tft.init();
 
-  h = tft.height();
-  w = tft.width();
+  int h = tft.height();
+  int w = tft.width();
 
   tft.setRotation(1);
 
-  tft.fillScreen(TFT_BLACK);
+  tft.fillScreen(TFT_WHITE);
 
   drawLines();
 }
@@ -56,11 +61,11 @@ void setup() {
 /***********************************************************************************************************************************/
 void loop() {
 
-  for (int i = 0; i < LinestoRender ; i++)
-  {
-    ORender[i] = Render[i]; // stores the old line segment so we can delete it later.
-    scroll_line();
-  }
+//  for (int i = 0; i < LinestoRender ; i++)
+//  {
+    ORender[2] = Render[2]; // stores the old line segment so we can delete it later.
+    scroll_line(&ORender[2]);
+//  }
 
   RenderImage(); // go draw it!
 
@@ -81,7 +86,7 @@ void RenderImage( void)
 
   for (int i = 0; i < LinestoRender; i++ )
   {
-    uint16_t color = TFT_BLUE;
+    uint16_t color = TFT_BLACK;
     tft.drawLine(Render[i].p0.x, Render[i].p0.y, Render[i].p1.x, Render[i].p1.y, color);
   }
   OldLinestoRender = LinestoRender;
@@ -94,13 +99,13 @@ void scroll_line(struct Line2d *ret) {
   
 
   //Test if overflow
-  if (ret.y0 > 480) {
+  if (ret->p0.y > 480) {
     ry0 = 200;
     ry1 = 160;
 
-  } else if (ret.y0 < 480) {
-    ry0 = (ret.y0 + SCROLL_OFFSET);
-    ry1 = ret.y1 + SCROLL_OFFSET;
+  } else if (ret->p0.y < 480) {
+    ry0 = (ret->p0.y + SCROLL_OFFSET);
+    ry1 = ret->p1.y + SCROLL_OFFSET;
 
   }
 
@@ -119,6 +124,8 @@ void scroll_line(struct Line2d *ret) {
 /***********************************************************************************************************************************/
 // line segments to draw a cube. basically p0 to p1. p1 to p2. p2 to p3 so on.
 void drawLines() {
+
+
   Lines[0].p0.x = 400;
   Lines[0].p0.y = 318;
   Lines[0].p0.x = 304;
@@ -139,6 +146,3 @@ void drawLines() {
   OldLinestoRender = LinestoRender;
 
 }
-
-
-
