@@ -38,15 +38,20 @@ struct Line2d
   Point2d p1;
 };
 
+
 Line2d Render[10];
 Line2d ORender[10];
+
+
+
 int line_render_delay = 0;
 int static_render_counter=0;
-int static_render_index = 0;
-int cycles_per_render = 50;
+int cycles_per_render = 10;
 
 /***********************************************************************************************************************************/
 void setup() {
+
+  Serial.begin(9600);
 
   tft.init();
 
@@ -64,21 +69,31 @@ void setup() {
 void loop() {
 
 
-
+  line_render_delay++;
   for (int i = 0; i < LinestoRender ; i++)
   {
     ORender[i] = Render[i]; // stores the old line segment so we can delete it later.
-    line_render_delay++;
-     if (i == 3 & line_render_delay == 200) {
-       scroll_line(&Render[i]);
-       line_render_delay = 0;
-     }
-   
   }
+
+  HomeScreen();
+
+   if (i > 2 && line_render_delay == 50) {
+      scroll_line(&Render[i]);
+     }
+
+  if (line_render_delay == 50) line_render_delay = 0;
 
   print("Need for Speed");
 
-  RenderImage(); // go draw it!
+  //Force render delay to remove flicker
+  static_render_counter++;
+  if (static_render_counter == cycles_per_render) {
+      RenderImage(); 
+      static_render_counter = 0;
+  }
+
+
+  
 
 //  delay(1); // Delay to reduce loop rate (reduces flicker caused by aliasing with TFT screen refresh rate)
 }
@@ -91,37 +106,34 @@ void RenderImage( void)
 
   //Slow rendering components kept in front part of lines array, will render every n cycles. Fixes
   //flickering
-  static_render_counter++;
-  if (static_render_counter == cycles_per_render) {
-    static_render_index = 0;
-  }
 
-  for (int i = static_render_index; i < OldLinestoRender; i++ )
+  for (int i = 0; i < LinestoRender; i++ )
   {
     tft.drawLine(ORender[i].p0.x, ORender[i].p0.y, ORender[i].p1.x, ORender[i].p1.y, BLACK); // erase the old lines.
+    tft.drawLine(Render[i].p0.x, Render[i].p0.y, Render[i].p1.x, Render[i].p1.y, WHITE);
   }
 
 
-  for (int i = static_render_index; i < LinestoRender; i++ )
-  {
-    uint16_t color = TFT_WHITE;
-    tft.drawLine(Render[i].p0.x, Render[i].p0.y, Render[i].p1.x, Render[i].p1.y, color);
-  }
+  // for (int i = 0; i < LinestoRender; i++ )
+  // {
+  //   uint16_t color = TFT_WHITE;
+  //   tft.drawLine(Render[i].p0.x, Render[i].p0.y, Render[i].p1.x, Render[i].p1.y, color);
+  // }
 
-  static_render_index = OldLinestoRender;
   OldLinestoRender = LinestoRender;
 }
 
  void scroll_line(struct Line2d *ret) {
 
    int rx0, rx1, ry0, ry1;
-   int SCROLL_OFFSET = 40;
+   int SCROLL_OFFSET = 30;
+   Serial.print("hello");
   
-
+    Serial.print(ret->p0.y);
    //Test if overflow
-   if (ret->p0.y > 320) {
-     ry0 = 150;
-     ry1 = 180;
+   if (ret->p0.y >= 320) {
+     ry0 = 150 + (320 - ret->p0.y);
+     ry1 = ry0 + 30;
 
    } else if (ret->p0.y < 320) {
      ry0 = (ret->p0.y + SCROLL_OFFSET);
@@ -144,51 +156,53 @@ void RenderImage( void)
 /***********************************************************************************************************************************/
 // line segments to draw a cube. basically p0 to p1. p1 to p2. p2 to p3 so on.
 void drawLines() {
-  // Render[0].p0.x = 400;
-  // Render[0].p0.y = 0;
-  // Render[0].p1.x = 300;
-  // Render[0].p1.y = 150;
-
-  //  Render[1].p0.x = 80;
-  //  Render[1].p0.y = 0;
-  //  Render[1].p1.x = 180;
-  //  Render[1].p1.y = 150;
-
-  //  Render[2].p0.x = 480;
-  //  Render[2].p0.y = 150;
-  //  Render[2].p1.x = 0;
-  //  Render[2].p1.y = 150;
-
-  //  Render[3].p0.x = 240;
-  //  Render[3].p0.y = 150;
-  //  Render[3].p1.x = 240;
-  //  Render[3].p1.y = 120;
 
   Render[0].p0.x = 80;
   Render[0].p0.y = 320;
   Render[0].p1.x = 180;
   Render[0].p1.y = 150;
+  Render[1].p0.x = 400;
+  Render[1].p0.y = 320;
+  Render[1].p1.x = 300;
+  Render[1].p1.y = 150;
+  Render[2].p0.x = 480;
+  Render[2].p0.y = 150;
+  Render[2].p1.x = 0;
+  Render[2].p1.y = 150;
 
-   Render[1].p0.x = 400;
-   Render[1].p0.y = 320;
-   Render[1].p1.x = 300;
-   Render[1].p1.y = 150;
-
-   Render[2].p0.x = 480;
-   Render[2].p0.y = 150;
-   Render[2].p1.x = 0;
-   Render[2].p1.y = 150;
-
-   Render[3].p0.x = 240;
-   Render[3].p0.y = 150;
-   Render[3].p1.x = 240;
-   Render[3].p1.y = 180;
+  Render[3].p0.x = 240;
+  Render[3].p0.y = 150;
+  Render[3].p1.x = 240;
+  Render[3].p1.y = 180;
 
 
-  LinestoRender = 4;
+  Render[4].p0.x = 240;
+  Render[4].p0.y = 200;
+  Render[4].p1.x = 240;
+  Render[4].p1.y = 230;
+
+  Render[5].p0.x = 240;
+  Render[5].p0.y = 250;
+  Render[5].p1.x = 240;
+  Render[5].p1.y = 280;
+
+  Render[6].p0.x = 240;
+  Render[6].p0.y = 300;
+  Render[6].p1.x = 240;
+  Render[6].p1.y = 330;
+
+
+  LinestoRender = 7;
   OldLinestoRender = LinestoRender;
 
 }
+
+void HomeScreen() {
+
+
+}
+
+
 
 void print(String s)
   {
