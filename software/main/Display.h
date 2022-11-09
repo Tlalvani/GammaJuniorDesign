@@ -1,12 +1,36 @@
 #include <TFT_HX8357.h> // Hardware-specific library
 #include <SD.h>
 #define RBUFF_SIZE 256
+
+#define BLACK 0x0000
+#define WHITE 0xFFFF
+
 #define BU_BMP 1 // Temporarily flip the TFT coords for standard Bottom-Up bit maps
 #define TD_BMP 0 // Draw inverted Top-Down bitmaps in standard coord frame
 class Display
 {
 private:
   TFT_HX8357 tft;
+  int line_render_delay = 0;
+  int static_render_counter = 0;
+  int cycles_per_render = 50;
+  struct Point2d
+  {
+    int x;
+    int y;
+  };
+
+  int LinestoRender; // lines to render.
+  int OldLinestoRender; // lines to render just in case it changes. this makes sure the old lines all get erased.
+  
+  struct Line2d
+  {
+    Point2d p0;
+    Point2d p1;
+  };
+
+  Line2d Render[10];
+  Line2d ORender[10];
 
 public:
   Display()
@@ -217,14 +241,12 @@ public:
     ((uint8_t *)&result)[3] = f.read(); // MSB
     return result;
   }
-  void print(String s)
+  void print(String s, int x, int y, int size, uint16_t color)
   {
   
     tft.setRotation(3);
-    tft.setTextColor(TFT_WHITE, TFT_BLACK);   
+    // tft.setTextColor(TFT_WHITE, TFT_BLACK);   
     tft.setTextDatum(4);
-    int x = 240;
-    int y = 120;
 
     // Length (with one extra character for the null terminator)
     int str_len = s.length() + 1; 
@@ -234,7 +256,11 @@ public:
     
     // Copy it over 
     s.toCharArray(char_array, str_len);
-    tft.drawCentreString(char_array, x, y, 4);
+    tft.setCursor(x, y);  
+    tft.setTextColor(color);  
+    tft.setTextSize(size);  
+    tft.print(char_array);
+    // tft.drawString(char_array, x, y, size);
   }
 
   void reset(){
@@ -246,4 +272,121 @@ public:
     tft.setRotation(1);
     drawBMP(s, 0, 0, 0);
   }
+
+  void setScreen() {
+
+    
+    Render[0].p0.x = 80;
+    Render[0].p0.y = 320;
+    Render[0].p1.x = 180;
+    Render[0].p1.y = 150;
+
+    Render[1].p0.x = 400;
+    Render[1].p0.y = 320;
+    Render[1].p1.x = 300;
+    Render[1].p1.y = 150;
+
+    Render[2].p0.x = 480;
+    Render[2].p0.y = 150;
+    Render[2].p1.x = 0;
+    Render[2].p1.y = 150;
+
+    Render[3].p0.x = 240;
+    Render[3].p0.y = 150;
+    Render[3].p1.x = 240;
+    Render[3].p1.y = 180;
+
+    Render[4].p0.x = 240;
+    Render[4].p0.y = 200;
+    Render[4].p1.x = 240;
+    Render[4].p1.y = 230;
+
+    Render[5].p0.x = 240;
+    Render[5].p0.y = 250;
+    Render[5].p1.x = 240;
+    Render[5].p1.y = 280;
+
+    Render[6].p0.x = 240;
+    Render[6].p0.y = 300;
+    Render[6].p1.x = 240;
+    Render[6].p1.y = 330;
+
+    // this.print("Hit the start button!", 240, 90, 4)
+
+
+    LinestoRender = 7;
+  }
+
+void updateScreen(int forceCycle) {
+ line_render_delay++;
+
+  for (int i = 0; i < LinestoRender ; i++)
+  {
+    ORender[i] = Render[i]; // stores the old line segment so we can delete it later.
+  if (i > 2 && line_render_delay == 50) {
+      scroll_line(&Render[i]);
+     }
+  }
+
+  if (line_render_delay == 50) line_render_delay = 0;
+
+  //Force render delay to remove flicker
+  static_render_counter++;
+  if (forceCycle == 1) static_render_counter = 0;
+  if (static_render_counter % cycles_per_render == 0) {
+      RenderRoad(); 
+      static_render_counter = 0;
+  }
+}
+
+  void scroll_line(struct Line2d *ret) {
+
+   int rx0, rx1, ry0, ry1;
+   int SCROLL_OFFSET = 20;
+   Serial.print("hello");
+  
+    Serial.print(ret->p0.y);
+   //Test if overflow
+   if (ret->p0.y >= 320) {
+     ry0 = 150 + (ret->p0.y - 320);
+     ry1 = ry0 + 30;
+
+   } else if (ret->p0.y < 320) {
+     ry0 = (ret->p0.y + SCROLL_OFFSET);
+     ry1 = ret->p1.y + SCROLL_OFFSET;
+
+   }
+
+  
+   // ret->p0.x = rx0;
+   ret->p0.y = ry0;
+
+   // ret->p1.x = rx1;
+   ret->p1.y = ry1;
+
+ }
+
+  void RenderRoad()
+{
+  // renders all the lines after erasing the old ones.
+  // in here is the only code actually interfacing with the OLED. so if you use a different lib, this is where to change it.
+
+  //Slow rendering components kept in front part of lines array, will render every n cycles. Fixes
+  //flickering
+
+  for (int i = 0; i < LinestoRender; i++ )
+  {
+    tft.drawLine(ORender[i].p0.x, ORender[i].p0.y, ORender[i].p1.x, ORender[i].p1.y, BLACK); // erase the old lines.
+    tft.drawLine(Render[i].p0.x, Render[i].p0.y, Render[i].p1.x, Render[i].p1.y, WHITE);
+  }
+
+
+  // for (int i = 0; i < LinestoRender; i++ )
+  // {
+  //   uint16_t color = TFT_WHITE;
+  //   tft.drawLine(Render[i].p0.x, Render[i].p0.y, Render[i].p1.x, Render[i].p1.y, color);
+  // }
+
+}
+
 };

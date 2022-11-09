@@ -77,7 +77,7 @@ void loop() {
 
   HomeScreen();
 
-   if (i > 2 && line_render_delay == 50) {
+   if (int i > 2 && line_render_delay == 50) {
       scroll_line(&Render[i]);
      }
 

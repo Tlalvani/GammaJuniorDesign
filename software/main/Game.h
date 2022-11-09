@@ -9,6 +9,9 @@
 #include "Display.h"
 #include "Pins.h"
 
+#define BLACK 0x0000
+#define WHITE 0xFFFF
+
 enum State
 {
     WAITING,
@@ -19,7 +22,7 @@ enum State
     LOW_BATTERY
 };
 
-const String actions[] = {"shift", "steer_left", "steer_right", "horn", "turn_signal"};
+const String actions[] = {"Shift it!", "Steer it left!", "Steer it right!", "Honk it!", "Turn signal it!"};
 
 enum Action
 {
@@ -124,18 +127,21 @@ public:
         display->reset();
         bool startScreen = false;
         while (true)
-        {
+        {   
+            
             int batteryLevel = analogRead(BATTERY_PIN);
             Serial.println("Battery Level: " + String(batteryLevel));
             if (state == State::WAITING)
             {
                 digitalWrite(2, 1);
                 if(!startScreen){
-                  display->image("ss.bmp");
+                //   display->setScreen((int) state);
+                display->setScreen();
+                display -> print("Need for SpEEd", 80, 60, 4, WHITE);
                   startScreen = true;
                 }
-                
-                //display->print("Hit start button");
+
+                display -> print("Hit the start button!", 120, 110, 2, WHITE);
                 Serial.println("Waiting for start");
                 if (start->getReading() == 1)
                 {
@@ -147,7 +153,20 @@ public:
             {
                 digitalWrite(2, 0);
                 display->reset();
-                display->print("Starting");
+                display->updateScreen(1);
+                display -> print("Starting in...", 80, 60, 4, WHITE);
+                display -> print("3", 235, 110, 2, 0xF800);
+                delay(1000);
+                display->reset();
+                display->updateScreen(1);
+                display -> print("Starting in...", 80, 60, 4, WHITE);
+                display -> print("2", 235, 110, 2, 0xFFE0);
+                delay(1000);
+                display->reset();
+                display->updateScreen(1);
+                display -> print("Starting in...", 80, 60, 4, WHITE);
+                display -> print("1", 235, 110, 2, 0x07E0);
+                delay(1000);
                 totalAttempts = 0;
                 correctAttempts = 0;
                 state = State::GENERATE_ACTION;
@@ -157,7 +176,9 @@ public:
                 delay(2000);
                 generatedAction = generateAction();
                 state = State::USER_INPUT;
-                display->print("Generated Action: " + actions[generatedAction]);
+                display->reset();
+                display->updateScreen(1);
+                display->print(actions[generatedAction], 80, 60, 4, WHITE);
                 Serial.print("Generated Action: ");
                 Serial.println(actions[generatedAction]);
             }
@@ -174,14 +195,14 @@ public:
                     {
                         actionMade = true;
                         display->reset();
-                        display->print("Correct action!");
+                        display->print("Correct action!", 80, 110, 4, 0x07E0);
                         correctAttempts++;
                         break;
                     }
                     else if (action != -1)
                     {
                         display->reset();
-                        display->print("Wrong action!");
+                        display->print("Wrong action!", 80, 110, 4, 0xF800);
                         actionMade = true;
                         break;
                     }
@@ -190,7 +211,9 @@ public:
                 if (action == -1)
                 {
                     display->reset();
-                    display->print("No action!");
+                    display->print("No action!", 100, 90, 4, WHITE);
+                    display->print("You lose :/", 120, 150, 3, WHITE);
+                    delay(5000);
                 }
                 totalAttempts++;
                 if (correctAttempts == 99 || !actionMade)
@@ -206,7 +229,7 @@ public:
             {
                 // Screen shows correctAttempts/totalAttempts
                 display->reset();
-                display->print("Score: " + String(correctAttempts) + "/" + String(totalAttempts));
+                display->print("Score: " + String(correctAttempts) + "/" + String(totalAttempts), 110, 90, 4, WHITE);
                 delay(5000);
                 display->reset();
                 state = State::WAITING;
@@ -214,8 +237,10 @@ public:
             }
             else if (state == LOW_BATTERY)
             {
-                display->print("LOW BATTERY: " + String(batteryLevel));
+                display->print("LOW BATTERY: " + String(batteryLevel), 240, 90, 4, WHITE);
             }
+
+        display->updateScreen(0);
         }
     }
 };
