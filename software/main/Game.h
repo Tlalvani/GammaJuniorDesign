@@ -206,13 +206,6 @@ public:
                         display->reset();
                         display->print("Wrong action!", 80, 110, 4, 0xF800);
                         actionMade = true;
-                        tone(SPEAKER_PIN, 30, 200);
-                        delay(100)
-                        tone(SPEAKER_PIN, 30, 50);
-                        delay(10)
-                        tone(SPEAKER_PIN, 30, 50);
-                        delay(10)
-                        tone(SPEAKER_PIN, 30, 50);
                         delay(2000);
                         break;
                     }
@@ -226,7 +219,10 @@ public:
                     delay(5000);
                 }
                 totalAttempts++;
-                if (correctAttempts == 99 || action != generatedAction)
+                if(correctAttempts == 99){
+                  state = State::WIN;
+                }
+                else if (action != generatedAction)
                 {
                     state = State::DONE;
                 }
@@ -247,16 +243,20 @@ public:
             }
             else if (state == WIN){
               display->reset();
-              display->updateScreen(1);
-              display->print("You're a speed demon", 80, 60, 4, WHITE);
-              display->print("You win!", 235, 110, 2, 0xF800);
+              display->print("You're a speed demon!", 70, 60, 3, WHITE);
+              display->print("You win!", 220, 110, 2, 0xF800);
               tone(SPEAKER_PIN, 400, 200);
-              delay(100)
+              delay(100);
               tone(SPEAKER_PIN, 400, 50);
-              delay(10)
+              delay(100);
               tone(SPEAKER_PIN, 400, 50);
-              delay(10)
+              delay(100);
               tone(SPEAKER_PIN, 400, 50);
+
+  
+              delay(5000);
+              display->reset();
+              state = State::DONE;
             }
             else if (state == LOW_BATTERY)
             {
