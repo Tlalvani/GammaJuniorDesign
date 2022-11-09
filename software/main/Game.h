@@ -19,7 +19,8 @@ enum State
     GENERATE_ACTION,
     USER_INPUT,
     DONE,
-    LOW_BATTERY
+    LOW_BATTERY,
+    WIN
 };
 
 const String actions[] = {"Shift it!", "Steer it left!", "Steer it right!", "Honk it!", "Turn signal it!"};
@@ -127,21 +128,22 @@ public:
         display->reset();
         bool startScreen = false;
         while (true)
-        {   
-            
+        {
+
             int batteryLevel = analogRead(BATTERY_PIN);
             Serial.println("Battery Level: " + String(batteryLevel));
             if (state == State::WAITING)
             {
                 digitalWrite(2, 1);
-                if(!startScreen){
-                //   display->setScreen((int) state);
-                display->setScreen();
-                display -> print("Need for SpEEd", 80, 60, 4, WHITE);
-                  startScreen = true;
+                if (!startScreen)
+                {
+                    //   display->setScreen((int) state);
+                    display->setScreen();
+                    display->print("Need for SpEEd", 80, 60, 4, WHITE);
+                    startScreen = true;
                 }
 
-                display -> print("Hit the start button!", 120, 110, 2, WHITE);
+                display->print("Hit the start button!", 120, 110, 2, WHITE);
                 Serial.println("Waiting for start");
                 if (start->getReading() == 1)
                 {
@@ -154,18 +156,18 @@ public:
                 digitalWrite(2, 0);
                 display->reset();
                 display->updateScreen(1);
-                display -> print("Starting in...", 80, 60, 4, WHITE);
-                display -> print("3", 235, 110, 2, 0xF800);
+                display->print("Starting in...", 80, 60, 4, WHITE);
+                display->print("3", 235, 110, 2, 0xF800);
                 delay(1000);
                 display->reset();
                 display->updateScreen(1);
-                display -> print("Starting in...", 80, 60, 4, WHITE);
-                display -> print("2", 235, 110, 2, 0xFFE0);
+                display->print("Starting in...", 80, 60, 4, WHITE);
+                display->print("2", 235, 110, 2, 0xFFE0);
                 delay(1000);
                 display->reset();
                 display->updateScreen(1);
-                display -> print("Starting in...", 80, 60, 4, WHITE);
-                display -> print("1", 235, 110, 2, 0x07E0);
+                display->print("Starting in...", 80, 60, 4, WHITE);
+                display->print("1", 235, 110, 2, 0x07E0);
                 delay(1000);
                 totalAttempts = 0;
                 correctAttempts = 0;
@@ -204,6 +206,7 @@ public:
                         display->reset();
                         display->print("Wrong action!", 80, 110, 4, 0xF800);
                         actionMade = true;
+                        delay(2000);
                         break;
                     }
                 }
@@ -216,7 +219,7 @@ public:
                     delay(5000);
                 }
                 totalAttempts++;
-                if (correctAttempts == 99 || !actionMade)
+                if (correctAttempts == 99 || action != generatedAction)
                 {
                     state = State::DONE;
                 }
@@ -229,18 +232,24 @@ public:
             {
                 // Screen shows correctAttempts/totalAttempts
                 display->reset();
-                display->print("Score: " + String(correctAttempts) + "/" + String(totalAttempts), 110, 90, 4, WHITE);
+                display->print("Score: " + String(correctAttempts), 110, 90, 4, WHITE);
                 delay(5000);
                 display->reset();
                 state = State::WAITING;
                 startScreen = false;
+            }
+            else if (state == WIN){
+              display->reset();
+              display->updateScreen(1);
+              display->print("You're a speed demon", 80, 60, 4, WHITE);
+              display->print("You win!", 235, 110, 2, 0xF800);
             }
             else if (state == LOW_BATTERY)
             {
                 display->print("LOW BATTERY: " + String(batteryLevel), 240, 90, 4, WHITE);
             }
 
-        display->updateScreen(0);
+            display->updateScreen(0);
         }
     }
 };
