@@ -23,7 +23,7 @@ enum State
     WIN
 };
 
-const String actions[] = {"Shift it!", "Steer it left!", "Steer it right!", "Honk it!", "Turn signal it!"};
+const String actions[] = {"Shift it!", "Steer it left!", "Steer it right!", "Honk it!"};
 
 enum Action
 {
@@ -44,7 +44,8 @@ private:
     Display *display;
     Action generateAction()
     {
-        int r = random(0, 5);
+        int r = random(0, 4);
+
         if (r == 0)
         {
             tone(SPEAKER_PIN, 400, 300);
@@ -57,11 +58,11 @@ private:
         {
             tone(SPEAKER_PIN, 250, 300);
         }
-        else if (r == 4)
-        {
-            tone(SPEAKER_PIN, 50, 300);
-        }
-        else
+        // else if (r == 4)
+        // {
+        //     tone(SPEAKER_PIN, 50, 300);
+        // }
+        else if (r == 1)
         {
             tone(SPEAKER_PIN, 150, 300);
         }
@@ -111,7 +112,7 @@ public:
         }
         else if (turnSignalDir != -1)
         {
-            return 4;
+            return -1;
         }
         else
             return -1;
