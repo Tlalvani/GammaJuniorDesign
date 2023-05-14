@@ -1,0 +1,42 @@
+Added Component: Designator=R1(OMTE-RES7X2.5-2)
+Add component (AddParameter): Name = "Catalog Drawings"; Value = "OD,OF,OASeries"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Category"; Value = "Resistors"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Composition"; Value = "CarbonComposition"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Datasheet URL"; Value = "http://www.ohmite.com/cat/res_od_of_oa.pdf"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Datasheet Version"; Value = "06/2016"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "EDA / CAD Models"; Value = "DownloadfromAcceleratedDesigns"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Family"; Value = "ThroughHoleResistors"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Features"; Value = "PulseWithstanding"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Height"; Value = "-"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer"; Value = "Ohmite"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer URL"; Value = "http://www.ohmite.com/"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mounting Technology"; Value = "ThroughHole"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Number of Terminations"; Value = "2"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Online Catalog"; Value = "OD,OF,OASeries,LittleDemon®"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Operating Temperature"; Value = "-"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package / Case"; Value = "Axial"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package Description"; Value = "2-Pin THD Resistor, Body 7 x 2.5 mm, Lead Dia. 0.6 mm"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package Reference"; Value = "RES7X2.5"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Packaging"; Value = "Bulk"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PartNumber"; Value = "OD103JE"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Power (Watts)"; Value = "0.25W,1/4W"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Power Rating"; Value = "0.25W"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Resistance (Ohms)"; Value = "10k"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "RoHS Information"; Value = "LittleDemon"E"SeriesMaterialDeclaration"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Series"; Value = "LittleDemon®OD"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Size / Dimension"; Value = "0.098"Diax0.276"L(2.50mmx7.00mm)"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Standard Package"; Value = "100"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Supplier Device Package"; Value = "Axial"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Temperature Coefficient"; Value = "-"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Tolerance"; Value = "±5%"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=NetB1_1 Pin=R1-1
+Added Pin To Net: NetName=+5 Pin=R1-2
+Add Pin To Net: Unknown Pin: Pin sp1-1
+Add Pin To Net: Unknown Pin: Pin sp1-2
+Add Pin To Net: Unknown Pin: Pin sp1-3
+Add Pin To Net: Unknown Pin: Pin sp1-4
+Add Pin To Net: Unknown Pin: Pin sp1-5
+Add Pin To Net: Unknown Pin: Pin sp1-6
+Added Member To Class: ClassName=Sheet1 Member=Component R1
+Add Class Member: Failed to add class member : Component sp1
+Added Room: Name=Sheet1
